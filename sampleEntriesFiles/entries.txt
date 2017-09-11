@@ -1,0 +1,9 @@
+[
+["color", "red"],
+["food", "clams"],
+["list", [1, "two"]],
+["pizza", "pepperoni"],
+["string_with_commas", "a,comma,separated,string"],
+["string_with_spaces", "this string has spaces"]
+
+]

@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <style type="text/css">
+        body {margin-left: 5% ; margin-right: 5%; margin-top: 0.5in;
+             font-family: verdana, arial,"trebuchet ms", helvetica, sans-serif;}
+        ul {list-style: disc;}
+    </style>
+    <title>AllTags Deletable TinyWebDB Service for App Inventor</title>
+  </head>
+  
+  <body>
+
+    <h2>AllTags Deletable TinyWebDB Service for App Inventor</h2>
+
+    <table border=0>
+      <tr valign="top">
+        <td><image src="/images/customLogo.gif" width="200" hspace="10"></td>
+        <td>
+          <p>
+            This TinyWebDB service is designed to work with 
+            <a href="http://appinventor.mit.edu">App Inventor</a> 
+            and the 
+            <a href="http://ai2.appinventor.mit.edu/reference/components/storage.html#TinyWebDB">
+            TinyWebDB</a> component. The end goal of this service is
+            to communicate with a mobile app created with App Inventor.
+          </p>
+           
+          <p>
+            The page you are looking at is 
+            a web page interface to the web service to help programmers with debugging. You
+            can invoke the store and get operations by hand, view the existing entries, 
+            and also delete individual entries.
+          </p>
+
+          <p>
+            You can make your own instance of this service by following 
+            <a href="https://sites.google.com/a/wellesley.edu/wellesley-cs117-fall14/goodies/tinywebdb-services/creating-a-custom-tinywebdb-service">
+            these instructions</a>. 
+           </p>
+        </td> 
+      </tr> 
+    </table>
+
+    <p>Available calls:
+
+    <ul>
+
+    <li><a href="/storeavalue">/storeavalue</a>: Stores a value at the given tag and updates
+        the tag list in the special tag <font color="red">*all_tags*</font>. 
+      <ul>
+        <li>Storing a tag with the special value <font color="red">*delete*</font> 
+              deletes the entry with that tag. 
+        <li>Storing the special tag <font color="red">*all_tags*</font> with the special 
+              value <font color="red">*delete*</font> deletes all entries 
+              except <font color="red">*all_tags*</font>,
+              which is set to the empty tag list. 
+        <li> An attempt to store any value other than <font color="red">*delete*</font> at the tag 
+               <font color="red">*all_tags*</font> is ignored. 
+        <li> An attempt to store any value at the tags
+               <font color="red">*all_values*</font>, 
+               <font color="red">*all_timestamps*</font>, 
+               and <font color="red">*all_entries*</font>, 
+               is ignored. 
+      </ul>
+    </li>
+    <li><a href="/getvalue">/getvalue</a>: Retrieves the value stored under a given tag.  
+        Returns the empty string if no value is stored.  
+      <ul> 
+        <li> Getting the special tag <font color="red">*all_tags*</font> 
+             retrieves a list of all other tags.
+        <li> Getting the special tag <font color="red">*all_values*</font> 
+             retrieves a list of all values, in the same order as the tags 
+             in <font color="red">*all_tags*</font>.
+        <li> Getting the special tag <font color="red">*all_timestamps*</font> 
+             retrieves a list of all timestamps, in the same order as the tags in 
+             <font color="red">*all_tags*</font>.
+        <li> Getting the special tag <font color="red">*all_entries*</font> 
+             retrieves a list of all tag/value/timestamp triples. 
+      </ul>
+    </li>
+    
+    </ul>
+
+    <p> The following buttons can be used to write out and read in the entries 
+        of the database table.
+
+    <ul> 
+      <li> <b>WriteEntriesToPage</b> writes all tag/value pairs in JSON list format 
+           to a web page, from which it can be saved to a file. 
+      <li> <b>AddEntriesFromFile</b> reads a file containing a JSON list of tag/value 
+           pairs and stores these in the database. 
+    </ul> 
+
+    <p><table>
+      <tr>
+        <td>
+          <form action="/writeentries" method="post"
+                enctype=application/x-www-form-urlencoded>
+            <input type="submit" value="WriteEntriesToPage">
+          </form>
+        </td>
+        <td style="width:30px;"></td>
+        <td>
+          <form action="/addentries" method="post" enctype="multipart/form-data">
+            <input type="submit" value="AddEntriesFromFile">
+            <label>File:</label>
+            <input type="file" name="entriesFile"/>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+    <p><table border=1>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+        <th>Created (GMT)</th>
+      </tr>
+      {{tableEntries}}
+    </table>
+
+</html>

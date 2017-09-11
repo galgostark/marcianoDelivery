@@ -1,0 +1,7 @@
+[
+["color", ["red", "blue", "green"]],
+["food", ["clams", "milk"]],
+["nothingYet", []],
+["list", [[1, "two"], [3, "four", "V"]]],
+["pizza", ["pepperoni"]]
+]

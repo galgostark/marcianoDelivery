@@ -1,0 +1,6 @@
+[
+["color", "red"],
+["food", "clams"],
+["list", [1, "two"]],
+["pizza", "pepperoni"]
+
